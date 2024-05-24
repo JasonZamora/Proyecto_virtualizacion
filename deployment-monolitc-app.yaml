@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: monolitic-app-deployment
+spec:
+  selector:
+    matchLabels:
+      app: monolitic-app
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: monolitic-app
+    spec:
+      containers:
+      - name: monolitic-app
+        image: monolithic-image-processingd
+        imagePullPolicy: Never
+        ports:
+          - containerPort: 5000
+            name: internal
+        resources:
+          limits:
+            cpu: "400m"
+            memory: "300Mi"
+          requests:
+            cpu: "200m"
+            memory: "200Mi"
